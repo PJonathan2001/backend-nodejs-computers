@@ -1,0 +1,236 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Seans-TypeScript-NodeJS-CRUD-REST-API-Boilerplate",
+        "description": "A minimal and easy to follow example of what you need to create a CRUD style API in NodeJs using TypeScript",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "Local Dev, or from Heroku"
+        },
+        {
+            "url": "/api/",
+            "description": "With docker-compose and nginx proxy"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Computer",
+            "description": "API for computer in the system"
+        },
+        {
+            "name": "Computers",
+            "description": "API for computers in the system"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/computers": {
+            "get": {
+                "tags": [
+                    "Computer"
+                ],
+                "summary": "Get all Computers in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Computer"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Computer"
+                ],
+                "summary": "Create a new Computer in system",
+                "requestBody": {
+                    "description": "Computer Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Computer"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/computers/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the computer that we want to match",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Computers"
+                ],
+                "summary": "Get computer with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Computer with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Computer"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Computer not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update computer with given ID",
+                "tags": [
+                    "Computers"
+                ],
+                "requestBody": {
+                    "description": "Computer Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Computer"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Computer with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Computer"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    },
+                    "404": {
+                        "description": "Failed. Computer not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete computer with given ID",
+                "tags": [
+                    "Computers"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Delete Computer with id",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Computer not found."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "Computer": {
+            "type": "object",
+            "properties": {
+                "procesador": {
+                    "type": "string"
+                },
+                "pantalla": {
+                    "type": "string"
+                },
+                "ram": {
+                    "type": "string"
+                },
+                "rom": {
+                    "type": "string"
+                },
+                "año_lanzamiento": {
+                    "type": "date"
+                }
+            }
+        },
+        "Computers": {
+            "type": "object",
+            "properties": {
+                "computers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Computer"
+                    }
+                }
+            }
+        }
+    }
+}
