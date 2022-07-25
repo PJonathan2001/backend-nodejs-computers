@@ -135,12 +135,12 @@ class PlayerController {
         return __awaiter(this, void 0, void 0, function* () {
             return computer_model_1.Computer.find({}).then(data => {
                 return {
-                    message: "OK: All players retrieve",
+                    message: "OK: All Computers retrieve",
                     status: 200,
                     content: data
                 };
             }).catch(err => {
-                return { message: "Error on retrieve Players", status: 500, content: err };
+                return { message: "Error on retrieve Computers", status: 500, content: err };
             });
         });
     }

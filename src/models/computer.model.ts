@@ -23,7 +23,7 @@ const computerSchema = new Schema<IComputer>({
 });
 
 //Model
-const Computer = model<IComputer>('Player', computerSchema);
+const Computer = model<IComputer>('Computer', computerSchema);
 
 export {Computer}
 

@@ -5,38 +5,38 @@ import { IResponse } from '../models/response.model';
 
 export const createComputer = async (req: Request, res: Response)=> {           
     const {numerador,procesador, pantalla, ram, rom,anio_lanzamiento}: IComputer = req.body;
-    const response = await new PlayerController().create({ numerador,procesador, pantalla, ram, rom,anio_lanzamiento});         
+    const response = await new ClienteController().create({ numerador,procesador, pantalla, ram, rom,anio_lanzamiento});         
     return res.status(response.status).json(response);   
 }
 
 export const retrieveComputer = async (req: Request, res: Response) => {
    const docId : String = req.params.id; 
-   const response = await new PlayerController().retrieve(docId);         
+   const response = await new ClienteController().retrieve(docId);         
    return res.status(response.status).json(response);   
 }
 
 export const updateComputer = async (req: Request, res: Response)=> {           
     const { numerador,procesador, pantalla, ram, rom, anio_lanzamiento} : IComputer = req.body;
     const docId : String = req.params.id; 
-    const response = await new PlayerController().update(docId, { numerador, procesador, pantalla, ram, rom,anio_lanzamiento });         
+    const response = await new ClienteController().update(docId, { numerador, procesador, pantalla, ram, rom,anio_lanzamiento });         
     return res.status(response.status).json(response);   
 }
 
 export const deleteComputer = async (req: Request, res: Response) => {
     const docId : String = req.params.id; 
-    const response = await new PlayerController().delete(docId);         
+    const response = await new ClienteController().delete(docId);         
     return res.status(response.status).json(response);   
  }
 
 export const listComputers = async (req: Request, res: Response) => {
-    const response = await new PlayerController().list();         
+    const response = await new ClienteController().list();         
     return res.status(200).json(response);    
 }
 
 
 
 
-class PlayerController {
+class ClienteController {
 
     public async create(payload : IComputer) : Promise<IResponse> {
         const computer = new Computer(payload);
